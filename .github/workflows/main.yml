@@ -6,18 +6,10 @@ name: CI
 # events but only for the master branch
 on:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '*/10 * * *'
 name: create-pull-request workflow
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-#   createPullRequest:
-#     runs-on: ubuntu-latest
-#     steps:
-#     -uses: action/checkout@v2
-#     -name: Create report file
-#      run: date +%s > report.txt
-#     -name: Create Pull Request
-#      uses: herlianli
   # This workflow contains a single job called "build"
   createPullRequest:
     # The type of runner that the job will run on
@@ -34,7 +26,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Create Pull Request
-        uses: herlianali/peminjaman-mik@v3
+        uses: herlianali/peminjaman-mik
         
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
