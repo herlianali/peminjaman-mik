@@ -19,6 +19,7 @@ class CreateLaboratoriumTable extends Migration
             $table->string('aslab', 45);
             $table->string('kapasitas', 20);
             $table->string('fasilitas', 40);
+            $table->string('foto', 255);
             $table->timestamps();
         });
     }

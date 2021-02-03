@@ -17,27 +17,46 @@ class loginController extends Controller
         return view('login.laborant');
     }
 
-    public function login(Request $request)
+    public function loginLaborant(Request $request)
     {
-        $username = $request->username;
-        $password = md5($request->password);
-        $role     = $request->role;
 
-        $user = User::select('*')->where('username', $username)
-                                 ->where('password', $password)
-                                 ->count();
-        $laborant = "laborant";
-        if ($user > 0) {
-            if($role == 'laborant'){
-                $session = $request->session()->put('username', "herlian");
-                return redirect('/home')->with(compact($laborant))->with(compact($session));
-            }elseif($role == 'mahasiswa') {
+        $user = User::where('username', $request->username)
+                    ->where('password', md5($request->password))
+                    ->first();
+
+        if ($user != null) {
+            if ($user['role'] == 'laborant') {
+                session([
+                    'login'    => true,
+                    'username' => $user['username'],
+                    'role'     => $user['role'],
+                ]);
+                return redirect('/home');
+            }else{
                 return redirect('/mahasiswa');
             }
         }else{
-            return redirect()->back();
+            return redirect('/laborant')->with('pesan', "Username Atau Password Salah");
         }
+        
+    }
 
+    public function loginUser(Request $request)
+    {
+
+        $user = User::where('username', $request->username)
+                    ->where('password', md5($request->password))
+                    ->first();
+
+        if ($user != null && $user['role'] == 'mahasiswa') {
+            $session = $request->session()
+                            ->put([
+                                'username'=>$username,
+                            ]);
+            return redirect('/mahasiswa')->with(compact('user'))->with(compact('session'));
+        }else{
+            return redirect('/')->with('pesan', "Username Atau Password Salah");
+        }
         
     }
 }

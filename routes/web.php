@@ -14,23 +14,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'loginController@index');
-Route::post('/login', 'loginController@login');
-Route::get('/login/laborant', 'loginController@laborant');
+Route::post('/login', 'loginController@loginUser');
+Route::get('/laborant', 'loginController@laborant');
+Route::post('/login', 'loginController@loginLaborant');
 
+// laborant
 Route::get('/home', 'dashController@index');
+
+// mahasiswa
 Route::get('/mahasiswa', 'dashController@mahasiswa');
+Route::get('/mahasiswaDaftar', 'MahasiswaController@DaftarLogin');
+Route::post('/mahasiswaDaftar', 'MahasiswaController@storeInLogin')->name('login.store');
+
+Route::get('/labMahasiswa', 'labController@laboratorium');
+Route::get('/alatMahasiswa', 'alatController@mahasiswa');
 
 Route::get('/pinjamLab/{id}', 'pinjamLabController@create');
-Route::post('/pinjamLab/simpan', 'pinjamLabController@store');
-
-Route::get('/laboratorium', 'labController@index');
-Route::get('/selesai/{id}', 'labController@selesai');
-
+Route::post('/pinjamLab', 'pinjamLabController@store');
 
 Route::get('/pinjamAlat/{id}', 'pinjamAlatController@create');
 Route::post('/pinjamAlat/simpan', 'pinjamAlatController@store');
 
-Route::get('/peralatan', 'alatController@index');
+Route::resource('/laboratorium', labController::class);
+Route::resource('/mahasiswa', MahasiswaController::class);
+
+Route::get('/peralatan', 'alatController@index')->name('peralatan');
 Route::get('/peralatan/mahasiswa', 'alatController@mahasiswa');
 Route::get('/peralatan/tambah', 'alatController@create');
-Route::post('/peralatan/simpan', 'alatController@store');
+Route::post('/peralatan/simpan', 'alatController@store')->name('peralatan.create');
+Route::delete('/peralatan/{id}', 'alatController@destroy')->name('peralatan.destroy');
+Route::get('/peralatan/{id}/edit', 'alatController@edit')->name('peralatan.edit');
+Route::put('/peralatan/{id}', 'alatController@update')->name('peralatan.update');

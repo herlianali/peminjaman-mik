@@ -19,20 +19,27 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Login </b>MIK</a>
+    <a href="../../index2.html"><b>Daftar Akun </b>MIK</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <img src="{{ url('asset/images/logo.png') }}" class="pl-4 ml-3" style="max-width: 90%">
-      <form action="{{ url('login') }}" method="post">
+      <form action="{{ route('login.store') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="hidden" name="role" value="laboran">
-          <input type="text" class="form-control" placeholder="Username" name="username">
+          <input type="text" class="form-control" placeholder="Nama" name="nama">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Username" name="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user-check"></span>
             </div>
           </div>
         </div>
@@ -44,15 +51,31 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Nim" name="nim">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-tag"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Kelas" name="kelas">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-chalkboard"></span>
+            </div>
+          </div>
+        </div>
         <input type="hidden" name="role" value="mahasiswa">
         <div class="row">
           <div class="col-8"></div>
           <div class="col-4 mb-3">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
           </div>
         </div>
           <p class="mb-1">
-            <a href="{{ url('mahasiswaDaftar') }}">Daftar Akun Baru</a>
+            <a href="{{ url('/') }}">Sudah Punya Akun</a>
           </p>
         <br>
         <br>

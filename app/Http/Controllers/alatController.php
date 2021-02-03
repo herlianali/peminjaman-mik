@@ -42,25 +42,25 @@ class alatController extends Controller
      */
     public function store(Request $request)
     {
-        $images = $request->images;
-        $path   = 'data_images';
+        $images    = $request->file('images');
+        $path      = 'data_images';
+        // $nama_file = time().".".$file->getClientOriginalExtension();
         
-        if ($images->extension() == "png" || "jpg" || "jpeg") {
-            
+        if ($images->extension() == "png" || "jpg" || "jpeg") 
+        {    
             $data = new Alat;
-            $data->nama_alat = $request->nama_alat;
-            $data->jumlah = $request->jumlah;
+            $data->nama_alat  = $request->nama_alat;
+            $data->jumlah     = $request->jumlah;
             $data->keterangan = $request->keterangan;
-            $data->tempat = $request->tempat;
-            $data->images = $images->getClientOriginalName();
+            $data->tempat     = $request->tempat;
+            $data->images     = $images->getClientOriginalName();
             $data->save();
 
             $images->move($path, $images->getClientOriginalName());
 
             return redirect('peralatan');
         }
-
-        // // return $request;
+        
     }
 
     /**
@@ -82,7 +82,9 @@ class alatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $alat = Alat::where('id_alat', $id)
+                    ->first();
+        return view('alat.edit', compact('alat'));
     }
 
     /**
@@ -94,7 +96,27 @@ class alatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $alat = Alat::where('id_alat', $id)
+                    ->first();
+        
+        if ($request->has('images')) {
+            $images    = $request->file('images');
+            $nama_file = time().".".$images->getClientOriginalExtension();   
+            $images->move('data_images', $nama_file);
+        }else{
+            $nama_file = $alat['images'];
+        }
+
+        Alat::where('id_alat', $id)
+            ->update([
+                'nama_alat'  => $request->nama_alat,
+                'jumlah'     => $request->jumlah,
+                'keterangan' => $request->keterangan,
+                'tempat'     => $request->tempat,
+                'images'     => $nama_file,
+            ]);
+
+        return redirect('peralatan');
     }
 
     /**
@@ -105,6 +127,9 @@ class alatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Alat::where('id_alat', $id)
+            ->delete();
+
+        return redirect('peralatan');
     }
 }

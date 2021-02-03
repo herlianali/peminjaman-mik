@@ -18,7 +18,7 @@
         </div>
       </div>
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 300px;">
+      <div class="card-body table-responsive p-0">
         <table class="table table-head-fixed text-nowrap">
           <thead>
             <tr>
@@ -32,14 +32,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>183</td>
-              <td>tank Krimping</td>
-              <td>30</td>
-              <td>masih mulus</td>
-              <td>tas perang</td>
-              <td><a href="{{ url('/pinjamAlat') }}" class="btn btn-primary btn-sm">Pinjam Alat</a></td>
-            </tr>
             @foreach ($datas as $no =>$data)
             <tr>
               <td>{{++$no + ($datas->currentPage()-1) * $datas->perPage()}}</td>
@@ -47,8 +39,15 @@
               <td>{{$data->jumlah}}</td>
               <td>{{$data->keterangan}}</td>
               <td>{{$data->tempat}}</td>
-              <td><img src="{{ url('/data_images') }}/{{$data->images}}" alt="" style="max-width: 50%"></td>
-              <td><a href="{{ url('/pinjamAlat') }}/{{$data->id_alat}}" class="btn btn-primary btn-sm">Pinjam Alat</a></td>
+              <td><img src="{{ url('/data_images') }}/{{$data->images}}" alt="" style="max-width: 50%; width: 100px;"></td>
+              <td>
+                <form action="{{ route('peralatan.destroy', $data->id_alat) }}" method="POST">
+                  @method('DELETE')
+                  @csrf
+                  <a href="{{ route('peralatan.edit', $data->id_alat) }}" class="btn btn-success btn-sm">Edit</a>
+                  <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                </form>
+              </td>
             </tr>
             @endforeach
           </tbody>

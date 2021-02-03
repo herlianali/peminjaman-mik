@@ -15,9 +15,11 @@ class CreateAlatTable extends Migration
     {
         Schema::create('alat', function (Blueprint $table) {
             $table->increments('id_alat');
-            $table->string('nama_alat',35);
-            $table->string('jumlah',45);
-            $table->text('keterangan');
+            $table->string('nama_alat',35)->nullable();
+            $table->string('jumlah',45)->nullable();
+            $table->text('keterangan')->nullable();
+            $table->string('tempat',45)->nullable();
+            $table->string('images',45)->nullable();
             $table->timestamps();
         });
     }

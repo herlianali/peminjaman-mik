@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Mahasiswa;
+use App\Model\User;
 use Illuminate\Http\Request;
-use App\Model\Laboratorium;
-use App\Model\PeminjamanLab;
 
-class pinjamLabController extends Controller
+class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,20 +15,56 @@ class pinjamLabController extends Controller
      */
     public function index()
     {
-        // return view('laboratorium.index');
+        return view('mahasiswa.index');
     }
 
+    public function DaftarLogin()
+    {
+        return view('mahasiswa.DaftarLogin');
+    }
+
+    public function storeInLogin(Request $request)
+    {
+        $request->validate([
+            'nama'     =>'required',
+            'username' =>'required',
+            'password' =>'required',
+            'nim'      =>'required',
+            'kelas'    =>'required',
+        ]);
+
+        $cekNim = Mahasiswa::select('nim')
+                           ->where('nim', $request->nim)
+                           ->get()
+                           ->count();
+
+        if ($cekNim != 0) {
+            return redirect('/mahasiswaDaftar')->with('pesan', 'nim sudah pernah didaftarkan');
+        }else{
+            Mahasiswa::create([
+                'nama'  => $request->nama,
+                'nim'   => $request->nim,
+                'kelas' => $request->kelas,
+            ]);
+
+            User::create([
+                'name'     => $request->nama,
+                'username' => $request->username,
+                'password' => md5($request->password),
+                'role'     => $request->role,
+            ]);
+        }
+
+        return redirect('/');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $data = Laboratorium::select('nama_lab')
-                            ->where('id_lab',$id)
-                            ->get();
-        return view('laboratorium.peminjaman')->with('data',$data);
+        //
     }
 
     /**
@@ -39,24 +75,7 @@ class pinjamLabController extends Controller
      */
     public function store(Request $request)
     {
-        $cekLab = PeminjamanLab::where('nama_lab', $request->namaLab)
-                              ->where('nim', $request->nim)
-                              ->first();
-        if ($cekLab['status'] == 'terpinjam') {
-            return redirect('/labMahasiswa')->with('Pesan', 'Lab Masih Terpinjam');
-        }else{
-            $pinjam = new PeminjamanLab;
-            $pinjam->nama_lab = $request->namaLab;
-            $pinjam->nama_peminjam = $request->namaPeminjam;
-            $pinjam->nim = $request->nim;
-            $pinjam->keperluan = $request->keperluan;   
-            $pinjam->status = "terpinjam";
-            $pinjam->tgl_pinjam = $request->tglPinjam;
-            $pinjam->tgl_kembali = $request->tglSelesai;
-            $pinjam->save();
-
-            return redirect('/labMahasiswa');
-        }
+        //
     }
 
     /**

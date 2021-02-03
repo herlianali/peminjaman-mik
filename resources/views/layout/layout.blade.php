@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>.::Peminjaman Lab::.</title>
+  <title>.::Peminjaman Alat & Lab::.</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('data_images/logo-umsida-tittle.png') }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,23 +35,19 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
-      <img src="{{ url('asset/LTE/dist/img/AdminLTELogo.png') }}"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">Peminjaman MIK</span>
+    <a href="../../index3.html" class="brand-link mx-auto">
+      <span class="brand-text font-weight-light pl-5">Peminjaman MIK</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ url('asset/LTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex bg-light">
+        <div class="image mx-auto" style="width: 200px;">
+          <img src="{{ asset('data_images/logo-brand-mik.png') }}" class="pt-3" alt="User Image" style="width: 200px; height: auto">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User MIK</a>
+          {{-- <a href="#" class="d-block">Laborant MIK</a> --}}
         </div>
       </div>
 
@@ -61,21 +58,46 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{ url('/home') }}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt text-info"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+          {{-- <li class="nav-item has-treeview"> --}}
+          <li class="nav-item ">
+            <a href=" {{ url('/laboratorium') }} " class="nav-link">
+              <i class="nav-icon fas fa-hospital-alt text-success"></i>
               <p>
-                Peminjaman
-                <i class="fas fa-angle-left right"></i>
+                Laboratorim
+                {{-- <i class="fas fa-angle-left right"></i> --}}
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('/laboratorium') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/peralatan') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Alat Praktek</p>
+                </a>
+              </li>
+            </ul> --}}
+          </li>
+          {{-- <li class="nav-item has-treeview"> --}}
+          <li class="nav-item">
+            <a href=" {{ url('/peralatan') }} " class="nav-link">
+              <i class="nav-icon fas fa-wrench text-warning"></i>
+              <p>
+                Peralatan Lab
+                {{-- <i class="fas fa-angle-left right"></i> --}}
+              </p>
+            </a>
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ url('/laboratorium') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -88,7 +110,23 @@
                   <p>Alat Praktek</p>
                 </a>
               </li>
-            </ul>
+            </ul> --}}
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/mahasiswa') }}" class="nav-link">
+              <i class="nav-icon fas fa-user-alt text-primary"></i>
+              <p>
+                Mahasiswa
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/logout') }}" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
+              <p>
+                Log Out
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
@@ -135,6 +173,7 @@
 <!-- AdminLTE App -->
 <script src="{{ url('asset/LTE/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
+@stack('jsTambahan')
 <script src="{{ url('asset/LTE/dist/js/demo.js') }}"></script>
 <script type="text/javascript">
   $(function () {

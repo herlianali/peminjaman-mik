@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Peminjaman MIK</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,12 +19,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Login </b>MIK</a>
+    <a href="../../index2.html"><b>Login </b>Laborant MIK</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
+    <img src="{{ url('data_images/logo-brand-mik.png') }}" class="card-img-top embed-responsive-item p-5" >
     <div class="card-body login-card-body">
-      <img src="{{ url('asset/images/logo.png') }}" class="pl-4 ml-3" style="max-width: 90%">
+      {{-- <div class=""> --}}
+      {{-- </div> --}}
       <form action="{{ url('/login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
