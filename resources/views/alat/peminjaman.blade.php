@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layoutMahasiswa')
 @section('header', 'Pinjam Alat')
 @section('isi')
 <!-- general form elements -->
@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <label for="peminjam">Peminjam</label>
-        <input type="text" class="form-control" id="peminjam" name="peminjam">
+        <input type="text" class="form-control" id="peminjam" name="peminjam" value="{{}}">
       </div>
       <div class="form-group">
         <label for="keperlan">Keperluan</label>

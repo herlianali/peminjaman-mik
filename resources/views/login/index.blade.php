@@ -25,7 +25,7 @@
   <div class="card">
     <div class="card-body login-card-body">
       <img src="{{ url('asset/images/logo.png') }}" class="pl-4 ml-3" style="max-width: 90%">
-      <form action="{{ url('login') }}" method="post">
+      <form action="{{ url('/login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
           <input type="hidden" name="role" value="laboran">

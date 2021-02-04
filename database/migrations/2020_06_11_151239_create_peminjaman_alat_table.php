@@ -15,8 +15,10 @@ class CreatePeminjamanAlatTable extends Migration
     {
         Schema::create('peminjaman_alat', function (Blueprint $table) {
             $table->increments('id_pinjamA');
-            $table->integer('id_alat');
+            $table->string('nama_alat');
             $table->string('nama_peminjam');
+            $table->string('keperlan');
+            $table->string('jumlah');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
             $table->timestamps();

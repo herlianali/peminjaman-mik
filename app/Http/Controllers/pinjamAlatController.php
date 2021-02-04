@@ -28,7 +28,7 @@ class pinjamAlatController extends Controller
         $peralatan = Alat::select('nama_alat')
                         ->where('id_alat',$id)
                         ->get();
-        return view('alat.peminjaman')->with(compact('peralatan'));
+        return view('mahasiswa.alat.peminjamanAlat')->with(compact('peralatan'));
     }
 
     /**
@@ -39,7 +39,25 @@ class pinjamAlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'alat' => 'required',
+            'peminjam' => 'required',
+            'keperluan' => 'required',
+            'jumlah' => 'required|numeric',
+            'tglPinjam' => 'required|date',
+            'tglKembali' => 'required|date',
+        ]);
+
+        PeminjamanAlat::create([
+            'nama_alat' => $request->alat,
+            'nama_peminjam' => $request->peminjam,
+            'keperluan' => $request->keperluan,
+            'jumlah' => $request->jumlah,
+            'tgl_pinjam' => $request->tglPinjam,
+            'tgl_kembali' => $request->tglKembali,
+        ]);
+
+        return redirect('/alatMahasiswa');
     }
 
     /**

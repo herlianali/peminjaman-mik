@@ -17,6 +17,8 @@ Route::get('/', 'loginController@index');
 Route::post('/login', 'loginController@loginUser');
 Route::get('/laborant', 'loginController@laborant');
 Route::post('/login', 'loginController@loginLaborant');
+Route::get('/logout', 'loginController@logout');
+
 
 // laborant
 Route::get('/home', 'dashController@index');

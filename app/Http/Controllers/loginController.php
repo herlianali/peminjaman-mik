@@ -51,13 +51,21 @@ class loginController extends Controller
         if ($user != null && $user['role'] == 'mahasiswa') {
             $session = $request->session()
                             ->put([
-                                'username'=>$username,
+                                'login'    => true,
+                                'username' => $user['username'],
+                                'role'     => $user['role'],
                             ]);
-            return redirect('/mahasiswa')->with(compact('user'))->with(compact('session'));
+            return redirect('/mahasiswa')->with(compact('session'));
         }else{
             return redirect('/')->with('pesan', "Username Atau Password Salah");
         }
         
+    }
+
+    public function logout()
+    {
+        session_unset();
+        return redirect('/');
     }
 }
  

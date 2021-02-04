@@ -21,7 +21,7 @@ class alatController extends Controller
     public function mahasiswa()
     {
         $datas = Alat::select('*')->paginate(10);
-        return view('alat.mahasiswa')->with(compact('datas'));
+        return view('mahasiswa.alat.alat')->with(compact('datas'));
     }
 
     /**

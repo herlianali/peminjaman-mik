@@ -23,7 +23,7 @@ class labController extends Controller
     public function laboratorium()
     {
         $labs = Laboratorium::all();
-        return view('mahasiswa.laboratorium', compact('labs'));
+        return view('mahasiswa.laboratorium.laboratorium', compact('labs'));
     }
     /**
      * Show the form for creating a new resource.
