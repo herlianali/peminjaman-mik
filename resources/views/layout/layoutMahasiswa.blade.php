@@ -56,24 +56,24 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ url('/home') }}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt text-info"></i>
+            <a href="{{ url('/dashboard') }}" class="nav-link {{ (request()->segment(1) == 'dashboard') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
           <li class="nav-item ">
-            <a href=" {{ url('/labMahasiswa') }} " class="nav-link">
-              <i class="nav-icon fas fa-hospital-alt text-success"></i>
+            <a href=" {{ url('/labMahasiswa') }} " class="nav-link {{ (request()->segment(1) == 'labMahasiswa') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-hospital-alt"></i>
               <p>
                 Laboratorim
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href=" {{ url('/alatMahasiswa') }} " class="nav-link">
-              <i class="nav-icon fas fa-wrench text-warning"></i>
+            <a href=" {{ url('/alatMahasiswa') }} " class="nav-link {{ (request()->segment(1) == 'alatMahasiswa') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-wrench"></i>
               <p>
                 Peralatan Lab
               </p>
@@ -81,7 +81,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/logout') }}" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Log Out
               </p>

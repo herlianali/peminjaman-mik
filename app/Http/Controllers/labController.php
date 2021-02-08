@@ -22,8 +22,14 @@ class labController extends Controller
 
     public function laboratorium()
     {
-        $labs = Laboratorium::all();
-        return view('mahasiswa.laboratorium.laboratorium', compact('labs'));
+
+        $nama = session('username');
+        $labs   = Laboratorium::all();
+        $pinjamLabs = PeminjamanLab::select('status')
+                              ->where('nama_peminjam', $nama)
+                              ->get();
+
+        return view('mahasiswa.laboratorium.laboratorium')->with(compact('labs'))->with(compact('pinjamLabs'));
     }
     /**
      * Show the form for creating a new resource.
@@ -53,7 +59,7 @@ class labController extends Controller
 
         $file = $request->file('foto');
         $nama_file = time().".".$file->getClientOriginalExtension();
-        $file->storeAs('/public/data_images/laboratorium', $nama_file);
+        $file->move('data_images/laboratorium', $nama_file);
 
         Laboratorium::create([
             'nama_lab'  => $request->namaLab,
@@ -106,7 +112,7 @@ class labController extends Controller
         if ($request->has('foto')) {
             $file = $request->file('foto');
             $nama_file = time().".".$file->getClientOriginalExtension();    
-            $file->storeAs('/public/data_images/laboratorium', $nama_file);
+            $file->move('data_images/laboratorium', $nama_file);
         }else{
             $nama_file = $lab['foto'];
         }

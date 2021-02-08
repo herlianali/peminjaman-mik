@@ -30,8 +30,8 @@
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
-                          <img class="img-fluid pad" src="{{ url('storage/data_images/laboratorium').'/'.$data['foto'] }}">
-                          <p>Keterangan Lab <br> kapasitas : {{$data['kapasitas']}}<br> fasilitas : {{$data['fasilitas']}}<br> penanggung jawab : {{$data['aslab']}}</p>
+                          <img class="img-fluid pad" src="{{ url('data_images/laboratorium').'/'.$data['foto'] }}">
+                          <p>Keterangan Lab <br> kapasitas : {{$data['kapasitas']}}<br> penanggung jawab : {{$data['aslab']}} <br> fasilitas : <br>{!!$data['fasilitas']!!}</p>
                           <div class="row">
                             
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$data['id_lab']}}">

@@ -13,12 +13,12 @@
 							{{ $lab->nama_lab }}
 						</h3>
 					</div>
-					<img class="card-img-top" src="{{ url('storage/data_images/laboratorium').'/'.$lab->foto }}" alt="Card image cap">
+					<img class="card-img-top" src="{{ url('/data_images/laboratorium').'/'.$lab->foto }}" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">{{ $lab->aslab }}</h5>
 						<p class="card-text">
 							Kapasitas Lab : {{ $lab->kapasitas }}<br>
-							Fasilitas : {{ $lab->fasilitas }}
+							Fasilitas : <br>{!! $lab->fasilitas !!}
 						</p>
 						<button class="btn btn-success" data-toggle="modal" data-target="#modal{{$lab->id_lab}}">Pinjam</button>
 					</div>

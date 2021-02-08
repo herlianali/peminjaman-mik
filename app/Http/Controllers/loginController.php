@@ -9,7 +9,7 @@ class loginController extends Controller
 {
     public function index()
     {
-        return view('login.index');
+        return view('login.mahasiswa');
     }
 
     public function laborant()
@@ -31,9 +31,9 @@ class loginController extends Controller
                     'username' => $user['username'],
                     'role'     => $user['role'],
                 ]);
-                return redirect('/home');
+                return redirect('/laborant/home');
             }else{
-                return redirect('/mahasiswa');
+                return redirect('/laborant')->with('pesan', "Username Atau Password Salah");
             }
         }else{
             return redirect('/laborant')->with('pesan', "Username Atau Password Salah");
@@ -55,7 +55,7 @@ class loginController extends Controller
                                 'username' => $user['username'],
                                 'role'     => $user['role'],
                             ]);
-            return redirect('/mahasiswa')->with(compact('session'));
+            return redirect('/dashboard')->with(compact('session'));
         }else{
             return redirect('/')->with('pesan', "Username Atau Password Salah");
         }

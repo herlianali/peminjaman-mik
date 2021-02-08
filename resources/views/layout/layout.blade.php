@@ -41,7 +41,6 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex bg-light">
         <div class="image mx-auto" style="width: 200px;">
           <img src="{{ asset('data_images/logo-brand-mik.png') }}" class="pt-3" alt="User Image" style="width: 200px; height: auto">
@@ -54,66 +53,31 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ url('/home') }}" class="nav-link">
+            <a href="{{ url('/laborant/home') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt text-info"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item has-treeview"> --}}
           <li class="nav-item ">
-            <a href=" {{ url('/laboratorium') }} " class="nav-link">
+            <a href=" {{ url('/laborant/laboratorium') }} " class="nav-link">
               <i class="nav-icon fas fa-hospital-alt text-success"></i>
               <p>
                 Laboratorim
-                {{-- <i class="fas fa-angle-left right"></i> --}}
               </p>
             </a>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('/laboratorium') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/peralatan') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Alat Praktek</p>
-                </a>
-              </li>
-            </ul> --}}
-          </li>
-          {{-- <li class="nav-item has-treeview"> --}}
           <li class="nav-item">
-            <a href=" {{ url('/peralatan') }} " class="nav-link">
+            <a href=" {{ url('/laborant/peralatan') }} " class="nav-link">
               <i class="nav-icon fas fa-wrench text-warning"></i>
               <p>
                 Peralatan Lab
-                {{-- <i class="fas fa-angle-left right"></i> --}}
               </p>
             </a>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('/laboratorium') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Laboratorium</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('/peralatan') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Alat Praktek</p>
-                </a>
-              </li>
-            </ul> --}}
           </li>
           <li class="nav-item">
-            <a href="{{ url('/mahasiswa') }}" class="nav-link">
+            <a href="{{ url('/laborant/mahasiswa') }}" class="nav-link">
               <i class="nav-icon fas fa-user-alt text-primary"></i>
               <p>
                 Mahasiswa

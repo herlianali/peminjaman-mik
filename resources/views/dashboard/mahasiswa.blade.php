@@ -28,22 +28,12 @@
                     <th>Peminjam</th>
                     <th>nim</th>
                     <th>Keperluan</th>
-                    <th>Jam Pinjam</th>
-                    <th>Jam Kembali</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Algoritma Pemrograman</td>
-                    <td>Angga Rif </td>
-                    <td>141080200123</td>
-                    <td>praktikum</td>
-                    <td>23.59</td>
-                    <td>00.00</td>
-                    <td>proses</td>
-                  </tr>
                 @foreach ($datas as $no => $value)
                   <tr>
                     <td>{{++$no + ($datas->currentPage()-1) * $datas->perPage()}}</td>
