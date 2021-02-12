@@ -58,7 +58,7 @@ class alatController extends Controller
 
             $images->move($path, $images->getClientOriginalName());
 
-            return redirect('peralatan');
+            return redirect('laborant/peralatan');
         }
         
     }

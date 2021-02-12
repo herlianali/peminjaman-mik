@@ -15,7 +15,8 @@ class ajaxApiController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all()->toArray();
+        return array_revese($users);
     }
 
     /**
@@ -36,7 +37,15 @@ class ajaxApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User([
+            'name' => $request->input('name'),
+            'role' => $request->input('role'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+        ]);
+
+        $user->save();
+        return response()->json('The user successfully added');
     }
 
     /**
@@ -58,7 +67,8 @@ class ajaxApiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return response()->json($user);
     }
 
     /**
@@ -70,7 +80,10 @@ class ajaxApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        
+        return response()->json('The user successfully update');
     }
 
     /**
@@ -81,6 +94,9 @@ class ajaxApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return response()->json('The User Successfully deleted');
     }
 }

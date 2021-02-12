@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Mahasiswa;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
@@ -15,7 +16,13 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.index');
+        $mhs = DB::table('mahasiswa')
+                    ->join('users', 'mahasiswa.id_user', '=', 'users.id')
+                    ->select('mahasiswa.*', 'users.username')
+                    ->latest()
+                    ->paginate('5');
+        return view('mahasiswa.index', compact('mhs'))
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function DaftarLogin()
@@ -97,7 +104,13 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mhs = DB::table('mahasiswa')
+                    ->join('users', function($join) {
+                        $join->on('mahasiswa.id_user', '=', 'users.id');
+                    })
+                    ->where('users.id', '=', $id)
+                    ->first();
+        return view('mahasiswa.edit', compact('mhs'));
     }
 
     /**
@@ -109,7 +122,22 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Mahasiswa::where('id_user', $id)
+                 ->update([
+                    'nama'  => $request->nama_mahasiswa,
+                    'nim'   => $request->nim,
+                    'kelas' => $request->kelas,
+                 ]);
+
+        User::where('id', $id)
+            ->update([
+                'name'     => $request->nama_mahasiswa,
+                'username' => $request->username,
+                'password' => md5($request->password),
+            ]);
+
+        return redirect()->route('mahasiswa.index')
+                         ->with(['success' => 'Berhasil mengedit data Mahasiswa']);
     }
 
     /**
@@ -120,6 +148,10 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::delete('id',$id);
+        Mahasiswa::delete('id_user',$id);
+
+        return redirect()->route('mahasiswa.index')
+                         ->with(['success' => 'Berhasil dihapus']);
     }
 }

@@ -45,11 +45,11 @@
 					</div>
 		        	<div class="form-group">
 					    <label for="namaPeminjam">Nama Peminjam</label>
-					    <input type="text" class="form-control" id="namaPeminjam" name="namaPeminjam" placeholder="Nama Peminjam">
+					    <input type="text" class="form-control" id="namaPeminjam" name="namaPeminjam" placeholder="Nama Peminjam" value="{{ $mhs->name }}" readonly>
 					</div>
 					<div class="form-group">
 					    <label for="nim">Nim</label>
-					    <input type="text" class="form-control" id="nim" placeholder="Nim" name="nim">
+					    <input type="text" class="form-control" id="nim" placeholder="Nim" name="nim" value={{$mhs->nim }} readonly>
 					</div>
 					<div class="form-group">
 					    <label for="keperluan">Keperluan</label>

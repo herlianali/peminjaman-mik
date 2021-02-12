@@ -7,7 +7,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{ $Tmhs }} Mahasiswa</h3>
 
             <p>Jumlah Mahasiswa</p>
           </div>
@@ -22,7 +22,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3>{{ $Tlab }} Lab</sup></h3>
 
             <p>Data Laboratorium</p>
           </div>
@@ -37,7 +37,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>@php($Talat === 0) ? 0 : echo $Talat @endphp</h3>
+            <h3> {{ $Talat }} Alat</h3>
 
             <p>Peralatan Laboratorium</p>
           </div>
@@ -52,7 +52,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>65</h3>
+            <h3>{{ $Tpinjam }} Pengguna</h3>
 
             <p>Data Pengguna Lab</p>
           </div>
@@ -97,17 +97,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Algoritma Pemrograman</td>
-                    <td>Angga Rif </td>
-                    <td>141080200123</td>
-                    <td>praktikum</td>
-                    <td>23.59</td>
-                    <td>00.00</td>
-                    <td>proses</td>
-                    <td><button class="btn btn-block bg-gradient-success btn-sm">selesai</button></td>
-                  </tr>
                 @foreach ($datas as $no => $value)
                   <tr>
                     <td>{{++$no + ($datas->currentPage()-1) * $datas->perPage()}}</td>
@@ -128,6 +117,6 @@
           </div>
           <!-- /.card -->
         </div>
-      </div>
+    </div>
   </div>
 @endsection

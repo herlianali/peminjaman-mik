@@ -8,6 +8,7 @@ use App\Model\Laboratorium;
 use App\Model\Mahasiswa;
 use App\Model\Peminjaman;
 use App\Model\User;
+use Validator;
 
 class ajaxController extends Controller
 {
@@ -18,9 +19,7 @@ class ajaxController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-
-        return view('ajaxTest/index', compact('user'));
+        
     }
 
     /**
@@ -41,7 +40,7 @@ class ajaxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -63,7 +62,7 @@ class ajaxController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -75,7 +74,7 @@ class ajaxController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -86,6 +85,6 @@ class ajaxController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

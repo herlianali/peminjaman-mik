@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CekLevelMiddleware
+class CekLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -13,11 +13,11 @@ class CekLevelMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next)
     {
-        if (session('role') === $role) {
-            return $next($request);
+        if (session()->has('role') === false) {
+            return back()->with('pesan', "anda harus login dulu");
         }
-        return back();
+        return $next($request);
     }
 }

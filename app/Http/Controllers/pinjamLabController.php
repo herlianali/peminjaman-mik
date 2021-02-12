@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Laboratorium;
+use App\Model\User;
+use App\Model\Mahasiswa;
 use App\Model\PeminjamanLab;
 
 class pinjamLabController extends Controller
@@ -28,7 +30,8 @@ class pinjamLabController extends Controller
         $data = Laboratorium::select('nama_lab')
                             ->where('id_lab',$id)
                             ->get();
-        return view('laboratorium.peminjaman')->with('data',$data);
+        return view('laboratorium.peminjaman')
+                    ->with(compact('data'));
     }
 
     /**

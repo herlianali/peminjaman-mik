@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">
-          <a href="{{ url('/peralatan/tambah') }}"><i class="fas fa-plus-circle fa-2x" data-toggle="tooltip" data-placement="right" title="tambah data"></i></a>
+          <a href="{{ url('/laborant/peralatan/tambah') }}"><i class="fas fa-plus-circle fa-2x" data-toggle="tooltip" data-placement="right" title="tambah data"></i></a>
         </h3>
         <div class="card-tools">
           <div class="input-group input-group-sm" style="width: 150px;">

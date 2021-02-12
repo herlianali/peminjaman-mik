@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Model\Laboratorium;
 use App\Model\PeminjamanLab;
 
@@ -22,14 +23,23 @@ class labController extends Controller
 
     public function laboratorium()
     {
-
         $nama = session('username');
+        $mhs = DB::table('mahasiswa')
+                    ->join('users', function($join) {
+                        $join->on('mahasiswa.nama', '=', 'users.name');
+                    })
+                    ->where('users.username', 'testlagi')
+                    ->first();
+        // dd($mhs);
         $labs   = Laboratorium::all();
         $pinjamLabs = PeminjamanLab::select('status')
                               ->where('nama_peminjam', $nama)
                               ->get();
 
-        return view('mahasiswa.laboratorium.laboratorium')->with(compact('labs'))->with(compact('pinjamLabs'));
+        return view('mahasiswa.laboratorium.laboratorium')
+                    ->with(compact('labs'))
+                    ->with(compact('mhs'))
+                    ->with(compact('pinjamLabs'));
     }
     /**
      * Show the form for creating a new resource.

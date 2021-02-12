@@ -19,7 +19,6 @@ class loginController extends Controller
 
     public function loginLaborant(Request $request)
     {
-
         $user = User::where('username', $request->username)
                     ->where('password', md5($request->password))
                     ->first();
@@ -29,6 +28,7 @@ class loginController extends Controller
                 session([
                     'login'    => true,
                     'username' => $user['username'],
+                    'id'       => $user['id'],
                     'role'     => $user['role'],
                 ]);
                 return redirect('/laborant/home');
@@ -62,9 +62,9 @@ class loginController extends Controller
         
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session_unset();
+        $request->session()->flush();
         return redirect('/');
     }
 }

@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
           <label for="peminjam">Peminjam</label>
-          <input type="text" class="form-control" id="peminjam" name="peminjam">
+          <input type="text" class="form-control" id="peminjam" name="peminjam" value="{{ $mhs->name }}">
         </div>
         <div class="form-group">
           <label for="nim">NIM</label>
