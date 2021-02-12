@@ -45,7 +45,8 @@ class pinjamLabController extends Controller
         $cekLab = PeminjamanLab::where('nama_lab', $request->namaLab)
                               ->where('nim', $request->nim)
                               ->first();
-        if ($cekLab['status'] == 'terpinjam') {
+
+        if ($cekLab['status'] == 'Menunggu') {
             return redirect('/labMahasiswa')->with('Pesan', 'Lab Masih Terpinjam');
         }else{
             $pinjam = new PeminjamanLab;
@@ -53,7 +54,7 @@ class pinjamLabController extends Controller
             $pinjam->nama_peminjam = $request->namaPeminjam;
             $pinjam->nim = $request->nim;
             $pinjam->keperluan = $request->keperluan;   
-            $pinjam->status = "terpinjam";
+            $pinjam->status = "Menunggu";
             $pinjam->tgl_pinjam = $request->tglPinjam;
             $pinjam->tgl_kembali = $request->tglSelesai;
             $pinjam->save();
@@ -82,6 +83,26 @@ class pinjamLabController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function status(Request $request, $id)
+    {
+        PeminjamanLab::where('id_pinjamL', $id)
+                    ->update([
+                        'status' => $request->status,
+                    ]);
+                    
+        return redirect('/laborant/home')->with('success', 'Status Peminjaman Lab Telah Berubah');
+    }
+
+    public function pengembalian(Request $request, $id)
+    {
+        PeminjamanLab::where('id_pinjamL', $id)
+                    ->update([
+                        'status' => $request->status,
+                    ]);
+                    
+        return redirect('/laborant/home')->with('success', 'Status Peminjaman Lab Telah Berubah');
     }
 
     /**

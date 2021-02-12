@@ -12,7 +12,8 @@ class PeminjamanAlat extends Model
     	'nama_alat',
     	'nama_peminjam',
     	'keperluan',
-    	'jumlah',
+		'jumlah',
+		'status',
     	'tgl_pinjam',
     	'tgl_kembali',
     ];

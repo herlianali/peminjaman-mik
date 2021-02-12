@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\PeminjamanAlat;
 use App\Model\Alat;
+use App\Model\User;
 
 class pinjamAlatController extends Controller
 {
@@ -25,10 +26,13 @@ class pinjamAlatController extends Controller
      */
     public function create($id)
     {
-        $peralatan = Alat::select('nama_alat')
-                        ->where('id_alat',$id)
-                        ->get();
-        return view('mahasiswa.alat.peminjamanAlat')->with(compact('peralatan'));
+        $username  = session('username');
+        $user      = User::where('username', $username)->first();
+        $peralatan = Alat::where('id_alat',$id)
+                        ->first();
+        return view('mahasiswa.alat.peminjamanAlat')
+                    ->with(compact('peralatan'))
+                    ->with(compact('user'));
     }
 
     /**
@@ -40,21 +44,29 @@ class pinjamAlatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'alat' => 'required',
-            'peminjam' => 'required',
-            'keperluan' => 'required',
-            'jumlah' => 'required|numeric',
-            'tglPinjam' => 'required|date',
+            'alat'       => 'required',
+            'peminjam'   => 'required',
+            'keperluan'  => 'required',
+            'jumlah'     => 'required|numeric',
+            'tglPinjam'  => 'required|date',
             'tglKembali' => 'required|date',
         ]);
+        
+        $jumlah = Alat::where('nama_alat', $request->alat)->select('jumlah')->first();
+
+        Alat::where('nama_alat', $request->alat)
+            ->update([
+                'jumlah' => $jumlah->jumlah - $request->jumlah,
+            ]);
 
         PeminjamanAlat::create([
-            'nama_alat' => $request->alat,
+            'nama_alat'     => $request->alat,
             'nama_peminjam' => $request->peminjam,
-            'keperluan' => $request->keperluan,
-            'jumlah' => $request->jumlah,
-            'tgl_pinjam' => $request->tglPinjam,
-            'tgl_kembali' => $request->tglKembali,
+            'keperluan'     => $request->keperluan,
+            'jumlah'        => $request->jumlah,
+            'status'        => 'Menunggu',
+            'tgl_pinjam'    => $request->tglPinjam,
+            'tgl_kembali'   => $request->tglKembali,
         ]);
 
         return redirect('/alatMahasiswa');
@@ -80,6 +92,32 @@ class pinjamAlatController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function status(Request $request, $id)
+    {
+        PeminjamanAlat::where('id_pinjamA', $id)
+                    ->update([
+                        'status' => $request->status,
+                    ]);
+        return redirect('/laborant/home')->with('success', 'Status Peminjaman Alat Telah Berubah');
+    }
+
+    public function pengembalian(Request $request, $id)
+    {
+        $jumlah = Alat::where('nama_alat', $request->alat)->first();
+
+        Alat::where('nama_alat', $request->alat)
+            ->update([
+                'jumlah' => $request->jumlah + $jumlah->jumlah,
+            ]);
+
+        PeminjamanAlat::where('id_pinjamA', $id)
+                    ->update([
+                        'status' => $request->status,
+                    ]);
+                    
+        return redirect('/laborant/home')->with('success', 'Status Peminjaman Alat Telah Berubah');
     }
 
     /**

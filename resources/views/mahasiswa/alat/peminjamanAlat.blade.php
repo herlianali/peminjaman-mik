@@ -15,13 +15,13 @@
       <div class="card-body">
         <div class="form-group">
           <label for="alat">Peralatan</label>
-          @foreach ($peralatan as $p)
-          <input type="text" class="form-control" id="alat" name="alat" value="{{$p['nama_alat']}}" readonly>
-          @endforeach
+          {{-- @foreach ($peralatan as $p) --}}
+          <input type="text" class="form-control" id="alat" name="alat" value="{{ $peralatan->nama_alat }}" readonly>
+          {{-- @endforeach --}}
         </div>
         <div class="form-group">
           <label for="peminjam">Peminjam</label>
-          <input type="text" class="form-control" id="peminjam" name="peminjam">
+          <input type="text" class="form-control" id="peminjam" name="peminjam" value="{{ $user->name }}" readonly>
         </div>
         <div class="form-group">
           <label for="keperlan">Keperluan</label>
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
           <label for="keperlan">Jumlah</label>
-          <input type="text" class="form-control" id="jumlah" name="jumlah">
+          <input type="text" class="form-control" id="jumlah" name="jumlah" placeholder="jumlah alat yang tersedia {{ $peralatan->jumlah }}">
         </div>
         <div class="row">
           <div class="form-group col-md-6">
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="jam_kembali">Jam Kembali</label>
-            <input type="date" class="form-control" id="tglK  embali" name="tglKembali">
+            <input type="date" class="form-control" id="tglKembali" name="tglKembali">
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ class labController extends Controller
                     ->join('users', function($join) {
                         $join->on('mahasiswa.nama', '=', 'users.name');
                     })
-                    ->where('users.username', 'testlagi')
+                    ->where('users.username', $nama)
                     ->first();
         // dd($mhs);
         $labs   = Laboratorium::all();

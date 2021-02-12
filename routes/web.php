@@ -26,7 +26,7 @@ Route::post('/mahasiswaDaftar', 'MahasiswaController@storeInLogin')->name('login
 Route::middleware('CekLoginMiddleware')->group( function() {
 	Route::middleware('CekLevelMiddleware:laborant')->group( function() {
 		Route::prefix('laborant')->group(function () {
-			Route::get('/home', 'dashController@index');
+			Route::get('/home', 'dashController@index')->name('home');
 		
 			Route::resource('/laboratorium', labController::class);
 			
@@ -38,22 +38,29 @@ Route::middleware('CekLoginMiddleware')->group( function() {
 			Route::delete('/peralatan/{id}', 'alatController@destroy')->name('peralatan.destroy');
 			Route::get('/peralatan/{id}/edit', 'alatController@edit')->name('peralatan.edit');
 			Route::put('/peralatan/{id}', 'alatController@update')->name('peralatan.update');
+
+			Route::put('/statusL/{id}', 'pinjamLabController@status')->name('statusL');
+			Route::put('/statusA/{id}', 'pinjamAlatController@status')->name('statusA');
+
 		});
 	});
 	Route::middleware('CekLevelMiddleware:mahasiswa')->group( function() {
 		// mahasiswa
 		Route::get('/dashboard', 'dashController@mahasiswa');
-
+		
 		Route::get('/labMahasiswa', 'labController@laboratorium');
 		Route::get('/alatMahasiswa', 'alatController@mahasiswa');
-
+		
 		Route::get('/pinjamLab/{id}', 'pinjamLabController@create');
 		Route::post('/pinjamLab', 'pinjamLabController@store');
-
+		
 		Route::get('/pinjamAlat/{id}', 'pinjamAlatController@create');
 		Route::post('/pinjamAlat/simpan', 'pinjamAlatController@store');
-
+		
 		Route::get('/peralatan/mahasiswa', 'alatController@mahasiswa');
+		
+		Route::put('/pengembalianL/{id}', 'pinjamLabController@pengembalian')->name('pengembalianL');
+		Route::put('/pengembalianA/{id}', 'pinjamAlatController@pengembalian')->name('pengembalianA');
 	});
 });
 

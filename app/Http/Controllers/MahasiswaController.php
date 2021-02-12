@@ -48,10 +48,12 @@ class MahasiswaController extends Controller
         if ($cekNim != 0) {
             return redirect('/mahasiswaDaftar')->with('pesan', 'nim sudah pernah didaftarkan');
         }else{
+            $id = User::select('id')->orderBy('id', 'Desc')->first();
             Mahasiswa::create([
-                'nama'  => $request->nama,
-                'nim'   => $request->nim,
-                'kelas' => $request->kelas,
+                'id_user' => $id->id + 1,
+                'nama'    => $request->nama,
+                'nim'     => $request->nim,
+                'kelas'   => $request->kelas,
             ]);
 
             User::create([
